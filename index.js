@@ -14,6 +14,10 @@ class Sprite {
     this.velocity = velocity;
     this.height = 150;
     this.lastKey;
+    this.attackBox = {
+      position: ,
+      width: ,
+      height: ,
     }
   }
 
