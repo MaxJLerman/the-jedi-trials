@@ -171,13 +171,19 @@ function animate() {
   }
 
   // collision detection for player
-  if (rectangularCollision(player, enemy) && player.isAttacking) {
+  if (rectangularCollision({
+    rectangle1: player,
+    rectangle2: enemy,
+  }) && player.isAttacking) {
     console.log('player attacked');
     player.isAttacking = false;
   }
 
   // collision detection for enemy
-  if (rectangularCollision(enemy, player) && enemy.isAttacking) { 
+  if (rectangularCollision({
+    rectangle1: enemy,
+    rectangle2: player,
+  }) && enemy.isAttacking) { 
     console.log('enemy attacked');
     enemy.isAttacking = false;
   }

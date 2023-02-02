@@ -1,0 +1,9 @@
+.healthBar {
+  background-color: yellow;
+  height: 30px;
+  width: 100px;
+}
+
+#container {
+  position: relative;
+}
