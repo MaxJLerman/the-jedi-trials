@@ -1,9 +1,72 @@
-.healthBar {
-  background-color: yellow;
-  height: 30px;
-  width: 100px;
+/* applies to all elements */
+* {
+  box-sizing: border-box;
 }
 
-#container {
+/* class styles */
+.healthBarContainer {
   position: relative;
+  height: 30px;
+  width: 100%;
+}
+
+.healthBarBackground {
+  background-color: yellow;
+  height: 30px;
+  width: 100%;
+}
+
+.healthBarForeground {
+  position: absolute;
+  background-color: rgb(47, 255, 61);
+  height: 30px;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.timerContainer {
+  background-color: red;
+  height: 100px;
+  width: 100px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* id styles */
+#outermostContainer {
+  position: relative;
+  display: inline-block;
+}
+
+#spritesContainer {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 20px;
+}
+
+#result {
+  position: absolute;
+  color: white;
+  display: none; /* temporarily hidden */
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#playerHealthContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#enemyHealth {
+  left: 0
 }

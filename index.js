@@ -26,6 +26,7 @@ class Sprite {
     },
     this.colour = colour;
     this.isAttacking;
+    this.health = 100;
   }
 
   draw() {
@@ -35,7 +36,7 @@ class Sprite {
 
     // attack box
     if (this.isAttacking) {
-      c.fillStyle = 'yellow';
+      c.fillStyle = 'grey';
       c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
     }
   }
@@ -142,6 +143,36 @@ function rectangularCollision({ rectangle1, rectangle2 }) {
   );
 }
 
+function determineWinner({ player, enemy }) {
+  document.querySelector('#result').style.display = 'flex'; // displays the result regardless of value
+  
+  if (player.health === enemy.health) {
+    document.querySelector('#result').innerHTML = 'Tie';
+  }
+
+  else if (player.health > enemy.health) {
+    document.querySelector('#result').innerHTML = 'Player wins!';
+  }
+
+  else if (player.health < enemy.health) {
+    document.querySelector('#result').innerHTML = 'Enemy wins!';
+  }
+}
+
+let timer = 10 + 1; // added +1 so the timer renders with provided value
+function decreateTimer() {
+  if (timer > 0) {
+    setTimeout(decreateTimer, 1000);
+    timer--;
+    document.querySelector('#timer').innerHTML = timer;
+  }
+  if (timer === 0) {
+    determineWinner({player, enemy});
+  }
+}
+
+decreateTimer();
+
 function animate() {
   window.requestAnimationFrame(animate);
   c.fillStyle = 'black';
@@ -175,8 +206,10 @@ function animate() {
     rectangle1: player,
     rectangle2: enemy,
   }) && player.isAttacking) {
-    console.log('player attacked');
+    // console.log('player attacked');
     player.isAttacking = false;
+    enemy.health -= 20;
+    document.querySelector('#enemyHealth').style.width = `${enemy.health}%`;
   }
 
   // collision detection for enemy
@@ -184,8 +217,15 @@ function animate() {
     rectangle1: enemy,
     rectangle2: player,
   }) && enemy.isAttacking) { 
-    console.log('enemy attacked');
+    // console.log('enemy attacked');
     enemy.isAttacking = false;
+    player.health -= 20;
+    document.querySelector('#playerHealth').style.width = `${player.health}%`;
+  }
+
+  // end game based on total health loss
+  if (player.health <= 0 || enemy.health <= 0) {
+    determineWinner({player, enemy});
   }
 }
 
