@@ -143,9 +143,10 @@ function rectangularCollision({ rectangle1, rectangle2 }) {
   );
 }
 
-function determineWinner({ player, enemy }) {
+function determineWinner({ player, enemy, timerID }) {
+  clearTimeout(timerID);
   document.querySelector('#result').style.display = 'flex'; // displays the result regardless of value
-  
+
   if (player.health === enemy.health) {
     document.querySelector('#result').innerHTML = 'Tie';
   }
@@ -160,14 +161,15 @@ function determineWinner({ player, enemy }) {
 }
 
 let timer = 10 + 1; // added +1 so the timer renders with provided value
+let timerID;
 function decreateTimer() {
   if (timer > 0) {
-    setTimeout(decreateTimer, 1000);
+    timerID = setTimeout(decreateTimer, 1000);
     timer--;
     document.querySelector('#timer').innerHTML = timer;
   }
   if (timer === 0) {
-    determineWinner({player, enemy});
+    determineWinner({player, enemy, timerID});
   }
 }
 
@@ -225,7 +227,7 @@ function animate() {
 
   // end game based on total health loss
   if (player.health <= 0 || enemy.health <= 0) {
-    determineWinner({player, enemy});
+    determineWinner({player, enemy, timerID});
   }
 }
 
