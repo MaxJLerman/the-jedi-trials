@@ -14,4 +14,4 @@ So here's a Road Map of the game's development so you can follow my progress:
 
 
 
-If you're interested in supporting development and future releases, I would be grateful for any contributions you could make. Your generosity would help me continue to improve and expand upon the game, and bring even more fun and excitement to you and others. Please consider donating to my PayPal <a href="https://www.paypal.com/donate/?hosted_button_id=ESX8UM8YGEJ9N" target="_blank">here</a>. Thank you for your support!
+If you're interested in supporting development and future releases, I would be grateful for any contributions you could make. Your generosity would help me continue to improve and expand upon the game, and bring even more fun and excitement to you and others. Please consider donating to my PayPal <a href="https://www.paypal.com/donate/?hosted_button_id=ESX8UM8YGEJ9N">here</a>. Thank you for your support!
