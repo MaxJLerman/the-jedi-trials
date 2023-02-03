@@ -44,6 +44,7 @@ const player = new Fighter({
     y: 155,
   },
   imageSrc: './assets/fighters/moyasu/Idle.png',
+  attackFrame: 4,
   maxFrames: 8,
   sprites: {
     idle: {
@@ -66,14 +67,22 @@ const player = new Fighter({
       imageSrc: './assets/fighters/moyasu/Attack1.png',
       maxFrames: 6,
     },
-    attackBox: {
-      offset: {
-        x: 0,
-        y: 0,
-      },
-      width: 100,
-      height: 50,
+    takeHit: {
+      imageSrc: './assets/fighters/moyasu/Take_Hit.png',
+      maxFrames: 4,
     },
+    death: {
+      imageSrc: './assets/fighters/moyasu/Death.png',
+      maxFrames: 6,
+    }
+  },
+  attackBox: {
+    offset: {
+      x: -10,
+      y: -23,
+    },
+    width: 268,
+    height: 164,
   },
 });
 
@@ -87,13 +96,14 @@ const enemy = new Fighter({
     y: 0,
   },
   colour: 'red',
+  scale: 2.5,
   offset: {
     x: -50,
     y: 0,
   },
   imageSrc: './assets/fighters/hikari/Idle.png',
+  attackFrame: 2,
   maxFrames: 4,
-  scale: 2.5,
   offset: {
     x: 215,
     y: 167
@@ -119,14 +129,22 @@ const enemy = new Fighter({
       imageSrc: './assets/fighters/hikari/Attack1.png',
       maxFrames: 4,
     },
-    attackBox: {
-      offset: {
-        x: 0,
-        y: 0,
-      },
-      width: 100,
-      height: 50,
+    takeHit: {
+      imageSrc: './assets/fighters/hikari/Take_Hit.png',
+      maxFrames: 3,
     },
+    death: {
+      imageSrc: './assets/fighters/hikari/Death.png',
+      maxFrames: 7,
+    },
+  },
+  attackBox: {
+    offset: {
+      x: -175,
+      y: 2,
+    },
+    width: 213,
+    height: 150,
   },
 });
 
@@ -174,6 +192,9 @@ function animate() {
   background.update(); // calls draw image method
   shop.update();
 
+  c.fillStyle = 'rgba(255, 255, 255, 0.15)'; // adds a white overlay with 15% opacity
+  c.fillRect(0, 0, canvas.width, canvas.height);
+
   player.update();
   enemy.update();
 
@@ -210,26 +231,44 @@ function animate() {
     enemy.switchSprite('falling');
   }
 
-  // collision detection for player
-  if (rectangularCollision({
-    rectangle1: player,
-    rectangle2: enemy,
-  }) && player.isAttacking) {
-    // console.log('player attacked');
+  // collision detection for player & enemy gets hit
+  if (rectangularCollision({ rectangle1: player, rectangle2: enemy }) &&
+      player.isAttacking &&
+      player.currentFrame === player.attackFrame
+   ) {
+    console.log('player attacked');
+    enemy.takeHit();
     player.isAttacking = false;
-    enemy.health -= 20;
-    document.querySelector('#enemyHealth').style.width = `${enemy.health}%`;
+
+    // document.querySelector('#enemyHealth').style.width = `${enemy.health}%`;
+    gsap.to('#enemyHealth', { // animates the health loss instead of taking a chunk off in one frame
+      width: `${enemy.health}%`,
+    });
   }
 
-  // collision detection for enemy
-  if (rectangularCollision({
-    rectangle1: enemy,
-    rectangle2: player,
-  }) && enemy.isAttacking) { 
-    // console.log('enemy attacked');
+  // if player misses
+  if (player.isAttacking && player.currentFrame === player.attackFrame) {
+    player.isAttacking = false;
+  }
+
+  // collision detection for enemy & player  gets hit
+  if (rectangularCollision({ rectangle1: enemy, rectangle2: player }) &&
+      enemy.isAttacking &&
+      enemy.currentFrame === enemy.attackFrame
+  ) { 
+    console.log('enemy attacked');
+    player.takeHit();
     enemy.isAttacking = false;
-    player.health -= 20;
-    document.querySelector('#playerHealth').style.width = `${player.health}%`;
+
+    // document.querySelector('#playerHealth').style.width = `${player.health}%`;
+    gsap.to('#playerHealth', { // animates the health loss instead of taking a chunk off in one frame
+      width: `${player.health}%`,
+    });
+  }
+
+  // if enemy misses
+  if (enemy.isAttacking && enemy.currentFrame === enemy.attackFrame) {
+    enemy.isAttacking = false;
   }
 
   // end game based on total health loss
@@ -242,56 +281,62 @@ animate(); // 'starts' the game
 
 window.addEventListener('keydown', (event) => {
   // console.log(`key: ${event.key}`);
+  if (!player.dead) {
+    switch (event.key) {
+      case 'w':
+        keys.W.pressed = true;
+        player.velocity.y = -20;
+        break;
 
-  switch (event.key) {
-    case 'w':
-      keys.W.pressed = true;
-      player.velocity.y = -20;
-      break;
+      case 'a':
+        keys.A.pressed = true;
+        player.lastKey = 'a';
+        break;
 
-    case 'a':
-      keys.A.pressed = true;
-      player.lastKey = 'a';
-      break;
+      case 's':
+        keys.S.pressed = true;
+        break;
 
-    case 's':
-      keys.S.pressed = true;
-      break;
+      case 'd':
+        keys.D.pressed = true;
+        player.lastKey = 'd';
+        break;
 
-    case 'd':
-      keys.D.pressed = true;
-      player.lastKey = 'd';
-      break;
-
-    case ' ':
-      keys.Space.pressed = true;
-      player.attack();
-      break;
-
-    case 'ArrowUp':
-      keys.ArrowUp.pressed = true;
-      enemy.velocity.y = -20;
-      break;
-
-    case 'ArrowLeft':
-      keys.ArrowLeft.pressed = true;
-      enemy.lastKey = 'ArrowLeft';
-      break;
-
-    case 'ArrowDown':
-      keys.ArrowDown.pressed = true;
-      break;
-
-    case 'ArrowRight':
-      keys.ArrowRight.pressed = true;
-      enemy.lastKey = 'ArrowRight';
-      break;
-
-    case 'Enter':
-      keys.Enter.pressed = true;
-      enemy.attack();
-      break;
+      case ' ':
+        keys.Space.pressed = true;
+        player.attack();
+        break;
+    }
   }
+
+  if (!enemy.dead) {
+    switch (event.key) {
+      case 'ArrowUp':
+        keys.ArrowUp.pressed = true;
+        enemy.velocity.y = -20;
+        break;
+    
+      case 'ArrowLeft':
+        keys.ArrowLeft.pressed = true;
+        enemy.lastKey = 'ArrowLeft';
+        break;
+    
+      case 'ArrowDown':
+        keys.ArrowDown.pressed = true;
+        break;
+    
+      case 'ArrowRight':
+        keys.ArrowRight.pressed = true;
+        enemy.lastKey = 'ArrowRight';
+        break;
+    
+      case 'Enter':
+        keys.Enter.pressed = true;
+        enemy.attack();
+        break;
+    }
+  }
+
 });
 
 window.addEventListener('keyup', (event) => {

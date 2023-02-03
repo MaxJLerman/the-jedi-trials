@@ -44,9 +44,9 @@ class Sprite {
     if (this.elapsedFrames % this.frameRate === 0) {
       if (this.currentFrame < this.maxFrames - 1) {
         this.currentFrame++;
+      } else {
+        this.currentFrame = 0;
       }
-      
-      else this.currentFrame = 0;
     }
   }
 
