@@ -21,7 +21,7 @@ So here's a Road Map of the game's development so you can follow my progress:
 .
 .
 .
-x. potentially add a story mode
+50. potentially add a story mode o.O
 
 
 
