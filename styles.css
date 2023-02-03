@@ -18,7 +18,7 @@
 
 .healthBarForeground {
   position: absolute;
-  background-color: rgb(47, 255, 61);
+  background-color: green;
   height: 30px;
   width: 100%;
   top: 0;
