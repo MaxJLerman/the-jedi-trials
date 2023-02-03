@@ -65,8 +65,16 @@ const player = new Fighter({
     attack1: {
       imageSrc: './assets/fighters/moyasu/Attack1.png',
       maxFrames: 6,
-    }
-  }
+    },
+    attackBox: {
+      offset: {
+        x: 0,
+        y: 0,
+      },
+      width: 100,
+      height: 50,
+    },
+  },
 });
 
 const enemy = new Fighter({
@@ -110,8 +118,16 @@ const enemy = new Fighter({
     attack1: {
       imageSrc: './assets/fighters/hikari/Attack1.png',
       maxFrames: 4,
-    }
-  }
+    },
+    attackBox: {
+      offset: {
+        x: 0,
+        y: 0,
+      },
+      width: 100,
+      height: 50,
+    },
+  },
 });
 
 // console.log(player);

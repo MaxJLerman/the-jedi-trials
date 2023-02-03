@@ -10,7 +10,12 @@ class Fighter extends Sprite {
       x: 0,
       y: 0
     },
-    sprites
+    sprites,
+    attackBox = {
+      offset: {},
+      width: 0,
+      height: 0,
+    },
   }) {
     super({
       position,
@@ -28,9 +33,9 @@ class Fighter extends Sprite {
         x: this.position.x,
         y: this.position.y,
       },
-      offset, // same as `offset: offset`
-      width: 100,
-      height: 50,
+      offset: attackBox.offset, // same as `offset: offset`
+      width: attackBox.width,
+      height: attackBox.height,
     },
     this.colour = colour;
     this.isAttacking;
@@ -42,6 +47,7 @@ class Fighter extends Sprite {
 
     for (const sprite in this.sprites) {
       sprites[sprite].image = new Image();
+      console.log(`sprite: ${sprite}`)
       sprites[sprite].image.src = sprites[sprite].imageSrc;
     }
   }
@@ -53,6 +59,8 @@ class Fighter extends Sprite {
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x; // x offset for the enemy to attack towards the left
     this.attackBox.position.y = this.position.y + this.attackBox.offset.y; // y offset to change the position of the attackBox on the sprites
 
+    c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
+    
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
 
