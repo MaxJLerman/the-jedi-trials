@@ -43,6 +43,7 @@ const player = new Fighter({
     x: 215,
     y: 155,
   },
+  imageSrc: './assets/fighters/moyasu/Idle.png',
   maxFrames: 8,
   sprites: {
     idle: {
@@ -61,6 +62,10 @@ const player = new Fighter({
       imageSrc: './assets/fighters/moyasu/Fall.png',
       maxFrames: 2,
     },
+    attack1: {
+      imageSrc: './assets/fighters/moyasu/Attack1.png',
+      maxFrames: 6,
+    }
   }
 });
 
@@ -78,6 +83,35 @@ const enemy = new Fighter({
     x: -50,
     y: 0,
   },
+  imageSrc: './assets/fighters/hikari/Idle.png',
+  maxFrames: 4,
+  scale: 2.5,
+  offset: {
+    x: 215,
+    y: 167
+  },
+  sprites: {
+    idle: {
+      imageSrc: './assets/fighters/hikari/Idle.png',
+      maxFrames: 4,
+    },
+    running: {
+      imageSrc: './assets/fighters/hikari/Run.png',
+      maxFrames: 8,
+    },
+    jumping: {
+      imageSrc: './assets/fighters/hikari/Jump.png',
+      maxFrames: 2,
+    },
+    falling: {
+      imageSrc: './assets/fighters/hikari/Fall.png',
+      maxFrames: 2,
+    },
+    attack1: {
+      imageSrc: './assets/fighters/hikari/Attack1.png',
+      maxFrames: 4,
+    }
+  }
 });
 
 // console.log(player);
@@ -125,7 +159,7 @@ function animate() {
   shop.update();
 
   player.update();
-  // enemy.update();
+  enemy.update();
 
   player.velocity.x = 0;
   enemy.velocity.x = 0;
@@ -148,8 +182,16 @@ function animate() {
   // enemy movement
   if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
     enemy.velocity.x = -5;
+    enemy.switchSprite('running');
   } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
     enemy.velocity.x = 5;
+    enemy.switchSprite('running');
+  } else enemy.switchSprite('idle');
+
+  if (enemy.velocity.y < 0) {
+    enemy.switchSprite('jumping');
+  } else if (enemy.velocity.y > 0) {
+    enemy.switchSprite('falling');
   }
 
   // collision detection for player
