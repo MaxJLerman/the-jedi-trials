@@ -3,70 +3,32 @@ const c = canvas.getContext('2d');
 
 canvas.width = 1024;
 canvas.height = 576;
+const usableCanvasHeight = canvas.height - 97;
 
 c.fillRect(0, 0, canvas.width, canvas.height);
 
 const gravity = 0.7;
 
-class Sprite {
-  constructor({ position, velocity, colour, offset }) {
-    this.position = position;
-    this.velocity = velocity;
-    this.width = 50;
-    this.height = 150;
-    this.lastKey;
-    this.attackBox = {
-      position: {
-        x: this.position.x,
-        y: this.position.y,
-      },
-      offset, // same as `offset: offset`
-      width: 100,
-      height: 50,
-    },
-    this.colour = colour;
-    this.isAttacking;
-    this.health = 100;
-  }
+const background = new Sprite({
+  position: {
+    x: 0,
+    y: 0,
+  },
+  imageSrc: './assets/images/background.png',
+  // topResetValue: 330,
+});
 
-  draw() {
-    // player, enemy
-    c.fillStyle = this.colour;
-    c.fillRect(this.position.x, this.position.y, this.width, this.height);
+const shop  = new Sprite({
+  position: {
+    x: 620,
+    y: 128,
+  },
+  imageSrc: './assets/images/shop.png',
+  scale: 2.75,
+  maxFrames: 6,
+});
 
-    // attack box
-    if (this.isAttacking) {
-      c.fillStyle = 'grey';
-      c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
-    }
-  }
-
-  update() {
-    this.draw();
-    this.attackBox.position.x = this.position.x + this.attackBox.offset.x; // x offset for the enemy to attack towards the left
-    this.attackBox.position.y = this.position.y + this.attackBox.offset.y; // y offset to change the position of the attackBox on the sprites
-
-    this.position.x += this.velocity.x;
-    this.position.y += this.velocity.y;
-
-    if (this.position.y + this.height + this.velocity.y >= canvas.height) {
-      this.velocity.y = 0; // stops player from moving past bottom of canvas
-    }
-
-    else {
-      this.velocity.y += gravity; // only adds gravity value when the y position is above the canvas.height (y < value)
-    }
-  }
-
-  attack() {
-    this.isAttacking = true;
-    setTimeout(() => {
-      this.isAttacking = false;
-    }, 100);
-  }
-}
-
-const player = new Sprite({
+const player = new Fighter({
   position: {
     x: 0,
     y: 0,
@@ -76,13 +38,33 @@ const player = new Sprite({
     y: 0,
   },
   colour: 'blue',
+  scale: 2.5,
   offset: {
-    x: 0,
-    y: 0,
+    x: 215,
+    y: 155,
   },
+  maxFrames: 8,
+  sprites: {
+    idle: {
+      imageSrc: './assets/fighters/moyasu/Idle.png',
+      maxFrames: 8,
+    },
+    running: {
+      imageSrc: './assets/fighters/moyasu/Run.png',
+      maxFrames: 8,
+    },
+    jumping: {
+      imageSrc: './assets/fighters/moyasu/Jump.png',
+      maxFrames: 2,
+    },
+    falling: {
+      imageSrc: './assets/fighters/moyasu/Fall.png',
+      maxFrames: 2,
+    },
+  }
 });
 
-const enemy = new Sprite({
+const enemy = new Fighter({
   position: {
     x: 400,
     y: 100,
@@ -98,7 +80,7 @@ const enemy = new Sprite({
   },
 });
 
-console.log(player);
+// console.log(player);
 
 const keys = {
   W: {
@@ -133,54 +115,17 @@ const keys = {
   },
 }
 
-// collision detection
-function rectangularCollision({ rectangle1, rectangle2 }) {
-  return (
-    rectangle1.attackBox.position.x + rectangle1.attackBox.width >= rectangle2.position.x && // rectangle1's right-side box colliding with left of rectangle2
-    rectangle1.attackBox.position.x <= rectangle2.position.x + rectangle2.width && // rectangle1's right-side box is on the left of the rectangle2 ONLY
-    rectangle1.attackBox.position.y + rectangle1.attackBox.height >= rectangle2.position.y && //
-    rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height //
-  );
-}
-
-function determineWinner({ player, enemy, timerID }) {
-  clearTimeout(timerID);
-  document.querySelector('#result').style.display = 'flex'; // displays the result regardless of value
-
-  if (player.health === enemy.health) {
-    document.querySelector('#result').innerHTML = 'Tie';
-  }
-
-  else if (player.health > enemy.health) {
-    document.querySelector('#result').innerHTML = 'Player wins!';
-  }
-
-  else if (player.health < enemy.health) {
-    document.querySelector('#result').innerHTML = 'Enemy wins!';
-  }
-}
-
-let timer = 10 + 1; // added +1 so the timer renders with provided value
-let timerID;
-function decreateTimer() {
-  if (timer > 0) {
-    timerID = setTimeout(decreateTimer, 1000);
-    timer--;
-    document.querySelector('#timer').innerHTML = timer;
-  }
-  if (timer === 0) {
-    determineWinner({player, enemy, timerID});
-  }
-}
-
 decreateTimer();
 
 function animate() {
   window.requestAnimationFrame(animate);
   c.fillStyle = 'black';
   c.fillRect(0, 0, canvas.width, canvas.height);
+  background.update(); // calls draw image method
+  shop.update();
+
   player.update();
-  enemy.update();
+  // enemy.update();
 
   player.velocity.x = 0;
   enemy.velocity.x = 0;
@@ -188,18 +133,22 @@ function animate() {
   // player movement
   if (keys.A.pressed && player.lastKey === 'a') {
     player.velocity.x = -5;
-  }
-
-  else if (keys.D.pressed && player.lastKey === 'd') {
+    player.switchSprite('running');
+  } else if (keys.D.pressed && player.lastKey === 'd') {
     player.velocity.x = 5;
+    player.switchSprite('running');
+  } else player.switchSprite('idle'); // sets the default image of the player
+
+  if (player.velocity.y < 0) { // jumping
+    player.switchSprite('jumping');
+  } else if (player.velocity.y > 0) { //falling
+    player.switchSprite('falling');
   }
 
   // enemy movement
   if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
     enemy.velocity.x = -5;
-  }
-
-  else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
+  } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
     enemy.velocity.x = 5;
   }
 
@@ -231,7 +180,7 @@ function animate() {
   }
 }
 
-animate();
+animate(); // 'starts' the game
 
 window.addEventListener('keydown', (event) => {
   // console.log(`key: ${event.key}`);
