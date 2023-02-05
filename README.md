@@ -1,7 +1,6 @@
 # Star Wars: The Jedi Trials
 
-## Play the game while development continues!
-thejeditrials.netlify.app
+## <a href="thejeditrials.netlify.app">Play the game while development continues!</a>
 
 The game started out as solely a mortal kombat style game just like any other copy. 
 
