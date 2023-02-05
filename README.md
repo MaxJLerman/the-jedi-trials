@@ -1,5 +1,8 @@
 # Star Wars: The Jedi Trials
 
+## Play the game while development continues!
+thejeditrials.netlify.app
+
 The game started out as solely a mortal kombat style game just like any other copy. 
 
 Then my love for Star Wars took over and ideas came flowing to me and I couldn't bear to risk forgetting any of them.
@@ -18,10 +21,8 @@ So here's a Road Map of the game's development so you can follow my progress:
 - senator palpatine, chancellor palpatine, emperor palpatine (play as anakin, switch to vader)
 - phantom menace maul, mechanical spider maul, mechanical legs maul, end-of-clone-wars maul, old maul (play as obi wan, changes to old ben)
 7. custom asset imports: characters, background
-.
-.
-.
-50. potentially add a story mode o.O
+8. potentially add a story mode
+9. maybe even multiversal expansions to other franchises... o.O
 
 
 
