@@ -1,6 +1,6 @@
 # Star Wars: The Jedi Trials
 
-## <a href="#" onclick='window.open("http://thejeditrials.netlify.app");return false;'>Play the game while development continues!</a>
+## <a href="http://thejeditrials.netlify.app" onclick="window.open(this.href,'_blank');return false;">Play the game while development continues!</a>
 
 The game started out as solely a mortal kombat style game just like any other copy. 
 
