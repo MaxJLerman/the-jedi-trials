@@ -1,4 +1,4 @@
-const canvas = document.querySelector('canvas ');
+const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 
 canvas.width = 1024;
@@ -15,7 +15,7 @@ const background = new Sprite({
     y: 0,
   },
   imageSrc: './assets/images/background.png',
-  // topResetValue: 330,
+  topResetValue: 330,
 });
 
 const shop  = new Sprite({
@@ -237,7 +237,7 @@ function animate() {
       player.isAttacking &&
       player.currentFrame === player.attackFrame
    ) {
-    console.log('player attacked');
+    // console.log('player attacked');
     enemy.takeHit();
     player.isAttacking = false;
 
@@ -257,7 +257,7 @@ function animate() {
       enemy.isAttacking &&
       enemy.currentFrame === enemy.attackFrame
   ) { 
-    console.log('enemy attacked');
+    // console.log('enemy attacked');
     player.takeHit();
     enemy.isAttacking = false;
 

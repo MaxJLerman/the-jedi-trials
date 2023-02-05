@@ -103,10 +103,11 @@ class Fighter extends Sprite {
 
   switchSprite(sprite) {
     // overriding all other animations with death animation
-    if (this.image === this.sprites.death.image && 
-        this.currentFrame < this.sprites.death.maxFrames - 1) {
-          this.dead = true;
-          return;
+    if (this.image === this.sprites.death.image) { 
+      if (this.currentFrame === this.sprites.death.maxFrames - 1) {
+        this.dead = true;
+      }
+      return;
     }
 
     // overriding all subsequent animations with attack animation
