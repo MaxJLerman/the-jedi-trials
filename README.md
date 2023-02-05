@@ -2,13 +2,13 @@
 
 ## <a href="http://thejeditrials.netlify.app">Play the game while development continues!</a>
 
-The game started out as solely a mortal kombat style game just like any other copy. 
+The project started out as solely a mortal kombat style game just like any other copy. 
 
 Then my love for Star Wars took over and ideas came flowing to me and I couldn't bear to risk forgetting any of them.
 
 So here's a Road Map of the game's development so you can follow my progress:
 
-1. finish boilerplate code
+1. finish boilerplate code ✅
 2. change assets to star wars related assets
 3. add character selection
 4. add multiple character skins
