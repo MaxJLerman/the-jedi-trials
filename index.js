@@ -194,6 +194,7 @@ function animate() {
 
   c.fillStyle = 'rgba(255, 255, 255, 0.15)'; // adds a white overlay with 15% opacity
   c.fillRect(0, 0, canvas.width, canvas.height);
+  c.fillStyle = 'rgba(0, 0, 0, 1)';
 
   player.update();
   enemy.update();

@@ -64,14 +64,14 @@ class Fighter extends Sprite {
     this.attackBox.position.y = this.position.y + this.attackBox.offset.y; // y offset to change the position of the attackBox on the sprites
 
     // draws the attack boxes
-    c.fillStyle = "rgba(0, 0, 0, 0.2)"; // sets opacity to 20%
-    c.fillRect(
-      this.attackBox.position.x,
-      this.attackBox.position.y,
-      this.attackBox.width,
-      this.attackBox.height
-      );
-      c.fillStyle = "rgba(0, 0, 0, 1)"; // resets opacity back to 100%
+    // c.fillStyle = "rgba(0, 0, 0, 0.2)"; // sets opacity to 20%
+    // c.fillRect(
+    //   this.attackBox.position.x,
+    //   this.attackBox.position.y,
+    //   this.attackBox.width,
+    //   this.attackBox.height
+    //   );
+    //   c.fillStyle = "rgba(0, 0, 0, 1)"; // resets opacity back to 100%
       
     
     this.position.x += this.velocity.x;
