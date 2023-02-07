@@ -8,6 +8,7 @@ class Sprite {
       x: 0,
       y: 0
     },
+    usableCanvasHeight, // y value to reference the bottom of a usable background
     topResetValue = 330, // y value to reset the position of the fighter sprites to
   }) {
     this.position = position;
@@ -21,6 +22,7 @@ class Sprite {
     this.elapsedFrames = 0;
     this.frameRate = 11;
     this.offset = offset;
+    this.usableCanvasHeight = usableCanvasHeight;
     this.topResetValue = topResetValue;
   }
 

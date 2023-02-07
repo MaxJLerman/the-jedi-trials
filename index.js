@@ -3,7 +3,6 @@ const c = canvas.getContext('2d');
 
 canvas.width = 1024;
 canvas.height = 576;
-const usableCanvasHeight = canvas.height - 97;
 
 c.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -15,6 +14,7 @@ const background = new Sprite({
     y: 0,
   },
   imageSrc: './assets/images/background.png',
+  usableCanvasHeight: canvas.height - 97,
   topResetValue: 330,
 });
 

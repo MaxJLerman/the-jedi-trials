@@ -78,7 +78,7 @@ class Fighter extends Sprite {
     this.position.y += this.velocity.y;
 
     // applies gravity if the fighter is not at the lowest level they can get (on the background)
-    if (this.position.y + this.height + this.velocity.y >= usableCanvasHeight) {
+    if (this.position.y + this.height + this.velocity.y >= background.usableCanvasHeight) {
       this.velocity.y = 0; // stops player from moving past bottom of scene
       this.position.y = background.topResetValue; // smoothens out the sprite changing
     } else {
