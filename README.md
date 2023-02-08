@@ -1,29 +1,70 @@
-# Star Wars: The Jedi Trials
+# Getting Started with Create React App
 
-## <a href="http://thejeditrials.netlify.app">Play the game while development continues!</a>
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-The project started out as solely a mortal kombat style game just like any other copy. 
+## Available Scripts
 
-Then my love for Star Wars took over and ideas came flowing to me and I couldn't bear to risk forgetting any of them.
+In the project directory, you can run:
 
-So here's a Road Map of the game's development so you can follow my progress:
+### `npm start`
 
-1. finish boilerplate code ✅
-2. change assets to star wars related assets
-3. add character selection
-4. add multiple character skins
-5. add separate character classes, weapons, kit
-- lightsaber wielders block, use the force, deactivate lightsaber (block turns into force dodge-back?)
-- blaster users dodge back, duck, use items
-6. special fights that use multiple stages
-- anakin (play as obi wan, set on mustafar, end cutsene?), vader, (play as) force vision vader (against force vision'd palpatine), end cutscene from comics?
-- senator palpatine, chancellor palpatine, emperor palpatine (play as anakin, switch to vader)
-- phantom menace maul, mechanical spider maul, mechanical legs maul, end-of-clone-wars maul, old maul (play as obi wan, changes to old ben)
-7. custom asset imports: characters, background
-8. potentially add a story mode
-9. maybe even multiversal expansions to other franchises... o.O
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
+### `npm test`
 
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-If you're interested in supporting development and future releases, I would be grateful for any contributions you could make. Your generosity would help me continue to improve and expand upon the game, and bring even more fun and excitement to you and others. Please consider donating to my PayPal <a href="https://www.paypal.com/donate/?hosted_button_id=ESX8UM8YGEJ9N">here</a>. Thank you for your support!
+### `npm run build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
