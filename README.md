@@ -9,19 +9,20 @@ Then my love for Star Wars took over and ideas came flowing to me and I couldn't
 So here's a Road Map of the game's development so you can follow my progress:
 
 1. finish boilerplate code ✅
-2. change assets to star wars related assets
-3. add character selection
-4. add multiple character skins
-5. add separate character classes, weapons, kit
+2. refactor the code to not be just plain class based JavaScript
+3. change assets to star wars related assets
+4. add character selection
+5. add multiple character skins
+6. add separate character classes, weapons, kit
 - lightsaber wielders block, use the force, deactivate lightsaber (block turns into force dodge-back?)
 - blaster users dodge back, duck, use items
-6. special fights that use multiple stages
+7. special fights that use multiple stages
 - anakin (play as obi wan, set on mustafar, end cutsene?), vader, (play as) force vision vader (against force vision'd palpatine), end cutscene from comics?
 - senator palpatine, chancellor palpatine, emperor palpatine (play as anakin, switch to vader)
 - phantom menace maul, mechanical spider maul, mechanical legs maul, end-of-clone-wars maul, old maul (play as obi wan, changes to old ben)
-7. custom asset imports: characters, background
-8. potentially add a story mode
-9. maybe even multiversal expansions to other franchises... o.O
+8. custom asset imports: characters, background
+9. potentially add a story mode
+10. maybe even multiversal expansions to other franchises... o.O
 
 
 
