@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div>
       <h2>Home Page</h2>
-      <br />
+      
       <ul>
         <li>
           {/* Endpoint to route to Home component */}
