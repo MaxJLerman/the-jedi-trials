@@ -10,6 +10,13 @@ So here's a Road Map of the game's development so you can follow my progress:
 
 1. finish boilerplate code ✅
 2. refactor the code to not be just plain class based JavaScript
+- convert class components into functional components
+- maybe change to TypeScript ?
+- convert index.js/.html into pages/components
+- create title page
+- create character selection page
+- implement game page
+- implement navigation between pages
 3. change assets to star wars related assets
 4. add character selection
 5. add multiple character skins
@@ -18,7 +25,7 @@ So here's a Road Map of the game's development so you can follow my progress:
 - blaster users dodge back, duck, use items
 7. special fights that use multiple stages
 - anakin (play as obi wan, set on mustafar, end cutsene?), vader, (play as) force vision vader (against force vision'd palpatine), end cutscene from comics?
-- senator palpatine, chancellor palpatine, emperor palpatine (play as anakin, switch to vader)
+- senator palpatine (=>yoda?), chancellor palpatine, emperor palpatine (play as anakin, switch to vader)
 - phantom menace maul, mechanical spider maul, mechanical legs maul, end-of-clone-wars maul, old maul (play as obi wan, changes to old ben)
 8. custom asset imports: characters, background
 9. potentially add a story mode
